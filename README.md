@@ -1,2 +1,10 @@
 # tt-music-search
-Music Search
+
+### Setup
+`npm install`
+
+### Run the web server
+`npm start`
+
+### Open your browser
+`http://localhost:3000/`
