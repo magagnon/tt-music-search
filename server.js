@@ -1,16 +1,15 @@
 var express = require('express'),
-    bodyParser = require('body-parser'),
-    consolidate = require('consolidate'),
-    cookieParser = require('cookie-parser'),
-    methodOverride = require('method-override'),
-    session = require('express-session'),
-    passport = require('passport'),
-    swig = require('swig'),
-    SpotifyStrategy = require('passport-spotify').Strategy;
+  bodyParser = require('body-parser'),
+  consolidate = require('consolidate'),
+  methodOverride = require('method-override'),
+  session = require('express-session'),
+  passport = require('passport'),
+  swig = require('swig'),
+  SpotifyStrategy = require('passport-spotify').Strategy;
 
 var appKey = 'faacdd13c1f344b48cd2994147a69b9f';
 var appSecret = 'f9dcad5597144e7e8e7d16707361f614';
-var callbackURL = 'http://localhost:8888/auth/spotify/callback';
+var callbackURL = 'http://localhost:3001/auth/spotify/callback';
 
 //  Passport session setup.
 //  To support persistent login sessions, Passport needs to be able to
@@ -20,11 +19,11 @@ var callbackURL = 'http://localhost:8888/auth/spotify/callback';
 //  have a database of user records, the complete spotify profile is serialized
 //  and deserialized.
 passport.serializeUser(function (user, done) {
-    done(null, user);
+  done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
-    done(null, obj);
+  done(null, obj);
 });
 
 
@@ -33,31 +32,33 @@ passport.deserializeUser(function (obj, done) {
 //  credentials (in this case, an accessToken, refreshToken, and spotify
 //  profile), and invoke a callback with a user object.
 passport.use(new SpotifyStrategy({
-    clientID: appKey,
-    clientSecret: appSecret,
-    callbackURL: callbackURL
+  clientID: appKey,
+  clientSecret: appSecret,
+  callbackURL: callbackURL
 },
-    function (accessToken, refreshToken, profile, done) {
-        //  asynchronous verification, for effect...
-        process.nextTick(function () {
-            // To keep the example simple, the user's spotify profile is returned to
-            // represent the logged-in user. In a typical application, you would want
-            // to associate the spotify account with a user record in your database,
-            // and return that user instead.
-            return done(null, profile);
-        });
-    }));
+  function (accessToken, refreshToken, profile, done) {
+    //  asynchronous verification, for effect...
+    process.nextTick(function () {
+      // To keep the example simple, the user's spotify profile is returned to
+      // represent the logged-in user. In a typical application, you would want
+      // to associate the spotify account with a user record in your database,
+      // and return that user instead.
+
+      console.log('user profile: ', profile, accessToken);
+
+      return done(null, profile);
+    });
+  }));
 
 var app = express();
 
 // configure Express
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/server/views');
 app.set('view engine', 'ejs');
 
-app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({ secret: 'BgU8$U6%f9qdLqqVgn?71@4SXbk5ac' }));
 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
@@ -68,15 +69,15 @@ app.use(express.static(__dirname + '/public'));
 app.engine('html', consolidate.swig);
 
 app.get('/', function (req, res) {
-    res.render('index.html', { user: req.user });
+  res.render('index.html', { user: req.user });
 });
 
 app.get('/account', ensureAuthenticated, function (req, res) {
-    res.render('account.html', { user: req.user });
+  res.render('account.html', { user: req.user });
 });
 
 app.get('/login', function (req, res) {
-    res.render('login.html', { user: req.user });
+  res.render('login.html', { user: req.user });
 });
 
 //  GET /auth/spotify
@@ -85,11 +86,11 @@ app.get('/login', function (req, res) {
 //  the user to spotify.com. After authorization, spotify will redirect the user
 //  back to this application at /auth/spotify/callback
 app.get('/auth/spotify',
-    passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }),
-    function (req, res) {
-        //  The request will be redirected to spotify for authentication, so this
-        //  function will not be called.
-    });
+  passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }),
+  function (req, res) {
+    //  The request will be redirected to spotify for authentication, so this
+    //  function will not be called.
+  });
 
 //  GET /auth/spotify/callback
 //  Use passport.authenticate() as route middleware to authenticate the
@@ -97,18 +98,22 @@ app.get('/auth/spotify',
 //  login page. Otherwise, the primary route function function will be called,
 //  which, in this example, will redirect the user to the home page.
 app.get('/auth/spotify/callback',
-    passport.authenticate('spotify', { failureRedirect: '/login' }),
-    function (req, res) {
-        res.redirect('/');
-    });
+  passport.authenticate('spotify', { failureRedirect: '/login' }),
+  
+  function (req, res) {
+    res.redirect('/');
+  });
 
 app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
-app.listen(8888);
+app.set("port", process.env.PORT || 3001);
 
+app.listen(app.get("port"), () => {
+  console.log(`Find the server at: http://localhost:${app.get("port")}/`);
+});
 
 //  Simple route middleware to ensure user is authenticated.
 //  Use this route middleware on any resource that needs to be protected.  If
@@ -116,6 +121,8 @@ app.listen(8888);
 //  the request will proceed. Otherwise, the user will be redirected to the
 //  login page.
 function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login');
+  console.log('isAuthenticated: ', req.isAuthenticated());
+
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
 }
