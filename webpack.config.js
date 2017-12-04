@@ -1,9 +1,13 @@
-var debug = process.env.NODE_ENV !== "production";
-var webpack = require('webpack');
-var path = require('path');
+const debug = process.env.NODE_ENV !== "production";
+const webpack = require('webpack');
+const path = require('path');
 
-var DIST_DIR = path.resolve(__dirname, "dist");
-var SRC_DIR = path.resolve(__dirname, "app");
+const DIST_DIR = path.resolve(__dirname, "dist");
+const SRC_DIR = path.resolve(__dirname, "app");
+
+// Webpack uses `publicPath` to determine where the app is being served from.
+// In development, we always serve from the root. This makes config easier.
+const publicPath = '/';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -41,7 +45,9 @@ module.exports = {
   },
   output: {
       path: DIST_DIR,
-      filename: "bundle.min.js"
+      filename: "bundle.min.js",
+      // This is the URL that app is served from
+      publicPath: publicPath
   },
   plugins: [HtmlWebpackPluginConfig]
 };
