@@ -19,13 +19,14 @@ var callbackURL = 'http://localhost:3001/auth/spotify/callback';
 //  have a database of user records, the complete spotify profile is serialized
 //  and deserialized.
 passport.serializeUser(function (user, done) {
+  console.log('serializeUser:', user);
   done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
+  console.log('deserializeUser:', obj);
   done(null, obj);
 });
-
 
 //  Use the SpotifyStrategy within Passport.
 //  Strategies in Passport require a `verify` function, which accept
@@ -43,8 +44,6 @@ passport.use(new SpotifyStrategy({
       // represent the logged-in user. In a typical application, you would want
       // to associate the spotify account with a user record in your database,
       // and return that user instead.
-
-      console.log('user profile: ', profile, accessToken);
 
       return done(null, profile);
     });
@@ -121,7 +120,6 @@ app.listen(app.get("port"), () => {
 //  the request will proceed. Otherwise, the user will be redirected to the
 //  login page.
 function ensureAuthenticated(req, res, next) {
-  console.log('isAuthenticated: ', req.isAuthenticated());
 
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
