@@ -1,8 +1,10 @@
 import axios from "axios";
 
-export function fetchReleases(token) {
+export function fetchReleases() {
   return function(dispatch) {
     dispatch({type: "FETCH_RELEASES"});
+
+    const token = localStorage.getItem('token')
 
     let config = {
       headers: {
