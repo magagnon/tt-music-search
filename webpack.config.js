@@ -19,6 +19,11 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   context: SRC_DIR,
   entry: SRC_DIR + "/src/index.js",
+
+  externals: {
+    "config": JSON.stringify(require('./app/src/config.dev.json'))
+  },
+
   module: {
     loaders: [
       // Preprocess our own .css files
@@ -29,26 +34,15 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: [
+            'react-html-attrs', 
+            'transform-class-properties', 
+            'transform-decorators-legacy',
+            'transform-object-rest-spread'
+          ]
         }
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
-      //     'postcss-loader',
-      //   ],
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]',
-      //     'postcss-loader',
-      //     'sass-loader',
-      //   ],
-      // },
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]

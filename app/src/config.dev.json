@@ -1,0 +1,8 @@
+{
+  "url": "https://accounts.spotify.com/authorize",
+  "client": "faacdd13c1f344b48cd2994147a69b9f",
+  "redirect": "http://localhost:3000/#/auth/callback",
+  "scope": "user-read-private user-read-email",
+  "width": 1080, 
+  "height": 640
+}  

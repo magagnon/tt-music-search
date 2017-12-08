@@ -1,16 +1,21 @@
-import React from 'react';
-import  ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import React from "react"
+import ReactDOM from "react-dom"
+import { HashRouter } from 'react-router-dom'
+import { createStore } from 'redux'
+import { connect } from 'react-redux'
+import { Provider } from "react-redux"
 
-import './index.css';
-import Layout from './components/Layout';
-const app = document.getElementById('root');
+import Layout from "./pages/Layout"
+
+import store from "./store"
+
+import './theme.css'
+
 ReactDOM.render(
-  <Router>
-    <Layout />
-  </Router>
-,app);
+  <Provider store={store}>
+    <HashRouter>
+      <Layout />
+    </HashRouter>
+  </Provider>, 
+  document.getElementById('root')
+);
