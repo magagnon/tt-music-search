@@ -10,6 +10,7 @@ import LoginPage from "./LoginPage"
 import NewReleases from "./NewReleases"
 
 export default class Layout extends Component {
+  
   render() {
     return (
       <div>

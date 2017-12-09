@@ -1,33 +1,31 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import { connect } from "react-redux"
-
-import { fetchReleases } from "../actions/releaseActions"
+import { withRouter } from "react-router"
+import { fetchAlbums } from "../actions/albumActions"
 
 import Album from "../components/Album"
 
-@connect((store) => {  
-  return {
-    token: store.auth.token,
-    isLoggedIn: store.auth.isLoggedIn,
-    albums: store.albums,
-  };
-})
-
-export default class Albums extends Component {
-  componentWillMount() {
-    // this.props.dispatch(fetchReleases(this.props.token))
-  }
+class Albums extends Component {
   
+  componentWillMount() {
+    this.props.dispatch(fetchAlbums(this.props.artistId))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.artistId != nextProps.artistId) {
+      this.props.dispatch(fetchAlbums(nextProps.artistId))
+    } 
+  }
+
   render() {
-    const { albums, artistId } = this.props;
-    // const albumList = albums.map(album => <Album key={album.id} data={album}/>)
+    const albumList = this.props.albums.map(album => <Album key={album.id} data={album}/>)
     
     return (
       <main role="main">
         <div class="album text-muted">
           <div class="container">
             <div class="row">
-              <p>This is an album list</p>
+              {albumList}
             </div>
           </div>    
         </div>    
@@ -35,3 +33,15 @@ export default class Albums extends Component {
     );
   }
 }
+
+const mapStateToProps = (store, ownProps) => {
+  return {
+    isLoggedIn: store.auth.isLoggedIn,
+    albums: store.albums.albums,
+    artistId: ownProps.match.params.artistId
+  };
+}
+
+export default connect(
+  mapStateToProps
+)(Albums)

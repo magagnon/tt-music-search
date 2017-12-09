@@ -7,7 +7,6 @@ import Album from "../components/Album"
 
 @connect((store) => {  
   return {
-    token: store.auth.token,
     isLoggedIn: store.auth.isLoggedIn,
     newReleases: store.newReleases,
   };
@@ -15,7 +14,7 @@ import Album from "../components/Album"
 
 export default class NewReleases extends Component {
   componentWillMount() {
-    this.props.dispatch(fetchReleases(this.props.token))
+    this.props.dispatch(fetchReleases())
   }
   
   render() {

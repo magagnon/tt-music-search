@@ -7,7 +7,7 @@ export default class LoginPage extends Component {
     return (
       <main role="main" class="container">      
         <div class="text-center">
-          <p class="lead">Log in to Spotify</p>
+          <p class="lead">Authentication</p>
           <Login />
         </div>
       </main>
