@@ -1,16 +1,45 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import spotifyLogo from "../../public/spotify.png"
 
-export default class Album extends Component {
-   
+class ArtistImage extends Component {
+  render () {
+    console.log('spotify logo: ', spotifyLogo)
+
+    const { name } = this.props
+    let url = this.props.url
+
+    if (url == undefined)
+      url = spotifyLogo
+    
+    return <img src={url} width="160" height="160"/>    
+  } 
+}
+
+export default class Artist extends Component {
   render() {
-    // const { id, name, artists, images, href } = this.props.data;
-    // <img class="img-responsive" src={images[1].url} alt={name} />
+    const { id, name, images } = this.props.data
+    
+    const smallImage = images.filter((image) => { return image.width >= 120 && image.width <= 300 })[0]
+    const mediumImage = images.filter((image) => { return image.width >= 300 && image.width <= 600 })[0]
 
     return (
-      <div class="card">
-        <p>This is an artist</p>       
-      </div>
+
+        <div class="col-6">             
+          <div class="row">
+            <div class="col-4">
+              <Link to={"/artists/" + id + "/albums"}>
+                <ArtistImage name={name} {... mediumImage} />
+              </Link>
+            </div>
+
+            <div class="col-8">
+              <Link to={"/artists/" + id + "/albums"}>
+                {name}
+              </Link> 
+            </div>
+          </div>
+        </div> 
     );
   }
 }

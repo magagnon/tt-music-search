@@ -1,5 +1,5 @@
 body {
-  min-height: 75rem; 
+  /* min-height: 75rem; */
   padding-top: 5rem;
 }
 
@@ -35,13 +35,16 @@ body {
 
 .card {
   float: left;
-  width: 33.333%;
+  /* width: 50%; */
+  width: 33.33%;
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
 }
 
-.card > img {
+.card > img, .card > a > img {
+  
+  display: block;
   margin-bottom: .75rem;
 }
 

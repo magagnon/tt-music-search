@@ -25,6 +25,7 @@ export default class NewReleases extends Component {
       <main role="main">
         <div class="album text-muted">
           <div class="container">
+            <h2>New Releases</h2>
             <div class="row">
               { mappedReleases }
             </div>
