@@ -50,4 +50,4 @@ const mapStateToProps = (store, ownProps) => {
 
 export default connect(
   mapStateToProps
-)(Albums)
+)(AlbumList)
