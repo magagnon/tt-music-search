@@ -6,6 +6,11 @@ import promise from "redux-promise-middleware"
 
 import reducer from "./reducers"
 
-const middleware = applyMiddleware(promise(), thunk, authMiddleware, createLogger())
+const middleware = applyMiddleware(
+  promise(), 
+  thunk, 
+  authMiddleware,
+  createLogger()
+)
 
 export default createStore(reducer, middleware)

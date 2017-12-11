@@ -7,10 +7,10 @@ export default function reducer(state={
 
   switch (action.type) {
     case "FETCH_ARTIST": {
-      return {...state, fetching: true}
+      return {...state, artist: {}, fetching: true}
     }
     case "FETCH_ARTIST_REJECTED": {
-      return {...state, fetching: false, error: action.payload}
+      return {...state, artist: {}, fetching: false, error: action.payload}
     }
     case "FETCH_ARTIST_FULFILLED": {            
       return {
@@ -21,10 +21,10 @@ export default function reducer(state={
       }
     }
     case "SEARCH_ARTISTS": {
-      return {...state, fetching: true}
+      return {...state, artists: [], fetching: true}
     }
     case "SEARCH_ARTISTS_REJECTED": {
-      return {...state, fetching: false, error: action.payload}
+      return {...state, artists: [], fetching: false, error: action.payload}
     }
     case "SEARCH_ARTISTS_FULFILLED": {            
       return {

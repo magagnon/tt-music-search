@@ -10,15 +10,22 @@ import Album from "../components/Album"
 class AlbumList extends Component {
   
   componentWillMount() {
-    this.props.dispatch(fetchArtist(this.props.artistId))
     this.props.dispatch(fetchAlbums(this.props.artistId))
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.artistId != nextProps.artistId) {
-      this.props.dispatch(fetchArtist(this.props.artistId))
       this.props.dispatch(fetchAlbums(nextProps.artistId))
     } 
+  }
+
+  getArtistName() {
+    const album = this.props.albums[0]
+
+    if (album != undefined) {
+      const artist = album.artists[0]
+      return artist.name
+    }    
   }
 
   render() {
@@ -28,7 +35,7 @@ class AlbumList extends Component {
       <main role="main">
         <div class="album text-muted">
           <div class="container">
-            <h2>{this.props.artist.name}</h2>
+            <h2>{this.getArtistName()}</h2>
             <div class="row">
               {albumList}
             </div>

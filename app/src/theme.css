@@ -1,10 +1,13 @@
 body {
-  /* min-height: 75rem; */
   padding-top: 5rem;
 }
 
 .navbar {
   margin-bottom: 0;
+}
+
+.artists-list {
+  margin-top: 30px;
 }
 
 .jumbotron {
@@ -35,11 +38,18 @@ body {
 
 .card {
   float: left;
-  /* width: 50%; */
   width: 33.33%;
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
+}
+
+.card-artist {
+  margin-bottom: 15px;
+}
+
+.card-artist-img {
+  border: 1px lightgrey solid;
 }
 
 .card > img, .card > a > img {

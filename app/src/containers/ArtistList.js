@@ -5,11 +5,11 @@ import Artist from "../components/Artist"
 
 class ArtistList extends Component {  
   render() {
-    const { artists } = this.props;
+    const { artists } = this.props
     const mappedArtists = artists.map(artist => <Artist key={artist.id} data={artist} />)
     
     return (
-      <div class="container">
+      <div class="container artists-list">
         <div class="row">
           { mappedArtists }
         </div>

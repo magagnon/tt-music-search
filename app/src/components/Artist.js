@@ -4,15 +4,13 @@ import spotifyLogo from "../../public/spotify.png"
 
 class ArtistImage extends Component {
   render () {
-    console.log('spotify logo: ', spotifyLogo)
-
     const { name } = this.props
     let url = this.props.url
 
     if (url == undefined)
       url = spotifyLogo
     
-    return <img src={url} width="160" height="160"/>    
+    return <img src={url} class="card-artist-img" width="160" height="160"/>    
   } 
 }
 
@@ -24,22 +22,21 @@ export default class Artist extends Component {
     const mediumImage = images.filter((image) => { return image.width >= 300 && image.width <= 600 })[0]
 
     return (
-
-        <div class="col-6">             
-          <div class="row">
-            <div class="col-4">
-              <Link to={"/artists/" + id + "/albums"}>
-                <ArtistImage name={name} {... mediumImage} />
-              </Link>
-            </div>
-
-            <div class="col-8">
-              <Link to={"/artists/" + id + "/albums"}>
-                {name}
-              </Link> 
-            </div>
+      <div class="col-6 card-artist">             
+        <div class="row">
+          <div class="col-4">
+            <Link to={"/artists/" + id + "/albums"}>
+              <ArtistImage name={name} {... mediumImage} />
+            </Link>
           </div>
-        </div> 
+
+          <div class="col-8">
+            <Link to={"/artists/" + id + "/albums"}>
+              {name}
+            </Link> 
+          </div>
+        </div>
+      </div> 
     );
   }
 }

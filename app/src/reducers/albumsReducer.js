@@ -8,7 +8,7 @@ export default function reducer(state={
 
   switch (action.type) {
     case "FETCH_ALBUMS": {
-      return {...state, artistId: action.artistId, fetching: true}
+      return {...state, artistId: action.artistId, albums: [], fetching: true}
     }
     case "FETCH_ALBUMS_REJECTED": {
       return {...state, fetching: false, error: action.payload}

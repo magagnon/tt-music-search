@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import Login from '../components/Login'
+import AuthButton from '../components/AuthButton'
 
 export default class Header extends Component {
   
@@ -17,7 +17,7 @@ export default class Header extends Component {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <NavLink class="nav-link" to="/sign-in">Sign In</NavLink>
+                <NavLink class="nav-link" to="/login">Sign In</NavLink>
               </li>
               <li class="nav-item">
                 <NavLink class="nav-link" to="/search">Search</NavLink>
@@ -25,15 +25,15 @@ export default class Header extends Component {
               <li class="nav-item">
                 <NavLink class="nav-link" to="/new-releases">New Releases</NavLink>
               </li>
-              <li class="nav-item">
+              {/* <li class="nav-item">
                 <NavLink class="nav-link" to="/artists/2ye2Wgw4gimLv2eAKyk1NB/albums">Show Metallica's Albums</NavLink>
               </li>
               <li class="nav-item">
                 <NavLink class="nav-link" to="/artists/51Blml2LZPmy7TTiAg47vQ/albums">Show U2's Albums</NavLink>
-              </li>
+              </li> */}
             </ul>
 
-            <Login />
+            <AuthButton />
           </div>
         </nav>
       </header>  
