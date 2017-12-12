@@ -25,12 +25,6 @@ export default class Header extends Component {
               <li class="nav-item">
                 <NavLink class="nav-link" to="/new-releases">New Releases</NavLink>
               </li>
-              <li class="nav-item">
-                <NavLink class="nav-link" to="/artists/2ye2Wgw4gimLv2eAKyk1NB/albums">Show Metallica's Albums</NavLink>
-              </li>
-              <li class="nav-item">
-                <NavLink class="nav-link" to="/artists/51Blml2LZPmy7TTiAg47vQ/albums">Show U2's Albums</NavLink>
-              </li>
             </ul>
 
             <AuthButton />
