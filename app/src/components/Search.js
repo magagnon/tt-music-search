@@ -34,7 +34,7 @@ class Search extends Component {
       <div class="container"> 
         <div class="input-group mb-2 mr-sm-2 mb-sm-0">          
           <input type="text" class="form-control" id="inlineFormInputGroupUsername2" 
-          placeholder="Artist"  onChange={event => { this.setState({ query: event.target.value }) }} onKeyDown={event => { this.onKeyDownHandler(event) }} />    
+          placeholder="Search Artists Ex: Muse"  onChange={event => { this.setState({ query: event.target.value }) }} onKeyDown={event => { this.onKeyDownHandler(event) }} />    
         </div>  
       </div>  
     )
