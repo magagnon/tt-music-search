@@ -70,3 +70,7 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+
+.list-group-item {
+  border: none;
+}
