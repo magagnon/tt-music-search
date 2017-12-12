@@ -29,7 +29,7 @@ class AlbumList extends Component {
   }
 
   render() {
-    const albumList = this.props.albums.map(album => <Album key={album.id} data={album}/>)
+    const albumList = this.props.albums.map(album => <Album key={album.id} album={album}/>)
     
     return (
       <main role="main">

@@ -12,7 +12,7 @@ export function fetchAlbums(artistId) {
       }
     }
 
-    axios.get("https://api.spotify.com/v1/artists/:artistId/albums".replace(":artistId", artistId), config)
+    axios.get("https://api.spotify.com/v1/artists/" + artistId + "/albums", config)
       .then((response) => {        
         dispatch({type: "FETCH_ALBUMS_FULFILLED", artistId: artistId, payload: response.data})
       })

@@ -19,7 +19,7 @@ export default class NewReleases extends Component {
   
   render() {
     const { newReleases } = this.props;
-    const mappedReleases = newReleases.albums.map(album => <Album key={album.id} data={album}/>)
+    const mappedReleases = newReleases.albums.map(album => <Album key={album.id} album={album}/>)
     
     return (
       <main role="main">
